@@ -408,8 +408,8 @@ public List<List<Integer>> combinationSum(int[] candidates, int target)
 func combinationSum(candidates []int, target int) [][]int {
 	var res [][]int
 	sort.Ints(candidates)
-	for i := 0; i < len(candidates); i++{
-		doCombinationSum([]int{}, candidates, i,target, &res)
+	for i := 0; i < len(candidates); i++ {
+		doCombinationSum([]int{}, candidates, i, target, &res)
 	}
 	return res
 }
@@ -421,7 +421,7 @@ func doCombinationSum(curS, candidates []int, i, target int, res *[][]int) {
 		*res = append(*res, d)
 		return
 	}
-	for j := i; j < len(candidates); j++{
+	for j := i; j < len(candidates); j++ {
 		if target-candidates[j] >= 0 {
 			curS = append(curS, candidates[j])
 			doCombinationSum(curS, candidates, j, target-candidates[i], res)
@@ -430,6 +430,7 @@ func doCombinationSum(curS, candidates []int, i, target int, res *[][]int) {
 	}
 
 }
+
 /*
 For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8,
 A solution set is:
@@ -439,8 +440,8 @@ A solution set is:
   [2, 6],
   [1, 1, 6]
 ]
- */
-func combinationSum2(candidates []int, target int) [][]int{
+*/
+func combinationSum2(candidates []int, target int) [][]int {
 	var res [][]int
 	hasVisited := make([]bool, len(candidates))
 	sort.Ints(candidates)
@@ -459,14 +460,14 @@ func doCombinationSum2(curS []int, i int, candidates []int, hasVisited []bool, t
 		return
 	}
 
-	for j := i; j < len(candidates); j++{
-		if hasVisited[j] || j > 0 && candidates[j-1] == candidates[j] && !hasVisited[j-1]{
+	for j := i; j < len(candidates); j++ {
+		if hasVisited[j] || j > 0 && candidates[j-1] == candidates[j] && !hasVisited[j-1] {
 			continue
 		}
 
 		hasVisited[j] = true
 		curS = append(curS, candidates[j])
-		doCombinationSum2(curS, j + 1, candidates, hasVisited, target-candidates[j], res)
+		doCombinationSum2(curS, j+1, candidates, hasVisited, target-candidates[j], res)
 		hasVisited[j] = false
 		curS = curS[:len(curS)-1]
 	}
@@ -482,52 +483,53 @@ Output:
 从 1-9 数字中选出 k 个数不重复的数，使得它们的和为 n。
 
 public List<List<Integer>> combinationSum3(int k, int n) {
- */
+*/
 
-func combinationSum3(k,n int) [][]int{
+func combinationSum3(k, n int) [][]int {
 	var res [][]int
 	doCombinationSum3([]int{}, 1, k, n, &res)
-	return  res
+	return res
 }
 
-func doCombinationSum3(curS []int, i, k,n int, res *[][]int){
+func doCombinationSum3(curS []int, i, k, n int, res *[][]int) {
 	//fmt.Println(curS, n)
-	if n == 0 && len(curS) == k{
+	if n == 0 && len(curS) == k {
 		d := make([]int, len(curS))
 		copy(d, curS)
 		*res = append(*res, d)
 		return
 	}
 
-	for j := i; j <= n; j++{
-		if n - j >= 0{
+	for j := i; j <= n; j++ {
+		if n-j >= 0 {
 			curS = append(curS, j)
-			doCombinationSum3(curS, j+1, k, n - j, res)
+			doCombinationSum3(curS, j+1, k, n-j, res)
 			curS = curS[:len(curS)-1]
 		}
 	}
 }
+
 /*
 找出集合的所有子集，子集不能重复，[1, 2] 和 [2, 1] 这种子集算重复
 
 public List<List<Integer>> subsets(int[] nums) {
- */
-func subsets(nums []int) [][]int{
+*/
+func subsets(nums []int) [][]int {
 	var res [][]int
 	sort.Ints(nums)
 	doSubsets([]int{}, 0, nums, &res)
 	return res
 }
 
-func doSubsets(curS []int, i int, nums []int, res *[][]int){
-	if len(curS) > 0{
+func doSubsets(curS []int, i int, nums []int, res *[][]int) {
+	if len(curS) > 0 {
 		d := make([]int, len(curS))
 		copy(d, curS)
 		*res = append(*res, d)
 		//return
 	}
 
-	for j := i; j < len(nums); j++{
+	for j := i; j < len(nums); j++ {
 		curS = append(curS, nums[j])
 		doSubsets(curS, j+1, nums, res)
 		curS = curS[:len(curS)-1]
@@ -548,8 +550,8 @@ If nums = [1,2,2], a solution is:
   []
 ]
 public List<List<Integer>> subsetsWithDup(int[] nums) {
- */
-func subsetsWithDup(nums []int) [][]int{
+*/
+func subsetsWithDup(nums []int) [][]int {
 	var res [][]int
 	hasVisited := make([]bool, len(nums))
 	doSubsetsWithDup([]int{}, 0, hasVisited, nums, &res)
@@ -557,14 +559,14 @@ func subsetsWithDup(nums []int) [][]int{
 	return res
 }
 
-func doSubsetsWithDup(curS []int, i int, hasVisited []bool, nums []int, res *[][]int){
-	if len(curS) > 0{
+func doSubsetsWithDup(curS []int, i int, hasVisited []bool, nums []int, res *[][]int) {
+	if len(curS) > 0 {
 		d := make([]int, len(curS))
 		copy(d, curS)
 		*res = append(*res, d)
 	}
 
-	for j := i; j < len(nums);j++{
+	for j := i; j < len(nums); j++ {
 		if hasVisited[j] || j > 0 && nums[j-1] == nums[j] && !hasVisited[j-1] {
 			continue
 		}
@@ -576,24 +578,52 @@ func doSubsetsWithDup(curS []int, i int, hasVisited []bool, nums []int, res *[][
 	}
 }
 
+/*
+For example, given s = "aab",
+Return
 
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+public List<List<String>> partition(String s) {
+*/
 
+func partition(s string) [][]string {
+	var res [][]string
+	doPartition([]string{}, 0, s, &res)
+	return res
+}
 
+func doPartition(curS []string, j int, s string, res *[][]string) {
+	//fmt.Println(curS)
+	if j == len(s) {
+		d := make([]string, len(curS))
+		copy(d, curS)
+		*res = append(*res, d)
+		return
+	}
 
+	for k := j; k < len(s); k++ {
+		if checkStr(j, k, s) {
+			d := []byte(s)[j : k+1]
+			curS = append(curS, string(d))
+			doPartition(curS, k+1, s, res)
+			curS = curS[:len(curS)-1]
+		}
+	}
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+func checkStr(si, ei int, s string) bool {
+	for si <= ei {
+		if s[si] != s[ei] {
+			return false
+		}
+		si++
+		ei--
+	}
+	return true
+}
 
 func main() {
 	/*
@@ -677,20 +707,23 @@ func main() {
 		res := combine(9,2)
 	*/
 	/*
-	res := combinationSum([]int{2, 3, 6, 7}, 7)
-	}
-	 */
+		res := combinationSum([]int{2, 3, 6, 7}, 7)
+		}
+	*/
 	/*
-	res := combinationSum2([]int{10, 1, 2, 7, 6, 1, 5}, 8)
-	 */
+		res := combinationSum2([]int{10, 1, 2, 7, 6, 1, 5}, 8)
+	*/
 	/*
-	res := combinationSum3(3, 9)
-	 */
+		res := combinationSum3(3, 9)
+	*/
 	/*
-	res := subsets([]int{1,2,3,4,5})
-	 */
-	res := subsetsWithDup([]int{1,2,2})
-	for _,s := range res{
+		res := subsets([]int{1,2,3,4,5})
+	*/
+	/*
+		res := subsetsWithDup([]int{1,2,2})
+	*/
+	res := partition("aabdb")
+	for _, s := range res {
 		fmt.Println(s)
 	}
 }
