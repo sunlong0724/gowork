@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"reflect"
+)
+
 func bubbleSort(s []int){
 	for i := 0; i < len(s)-1; i++{
 		for j := 1; j < len(s)-i; j++{
@@ -143,6 +148,35 @@ func g() {
 	println(a)
 }
 
+func hello(){
+	fmt.Println("hello world.")
+}
+func doCall(callee interface{}){
+	ee := reflect.ValueOf( callee)
+	fmt.Println(ee.Kind() == reflect.Func)
+	ee.Call(nil)
+}
+
+type MyType struct{
+	i int
+	name string
+}
+
+func (this *MyType)SetI(i int){
+	this.i = i
+}
+func (this *MyType) SetName(name string){
+	this.name = name
+}
+func (this *MyType) ToString() string{
+	return fmt.Sprintf("%p:name:%s,i:%d",this, this.name, this.i)
+}
+/*
+func (this MyType) ToString() string{
+	return fmt.Sprintf("%p:name:%s,i:%d",this, this.name, this.i)
+}
+ */
+
 func main(){
 	//var s = []int{2,1,3,2,4,6,5,11,21,22,13,23,33,43,5,4,3,6,8,99}
 	//bubbleSort(s)
@@ -159,7 +193,18 @@ func main(){
 	//emptyStru := struct {}{}
 	//emptyStru2 := struct {}{}
 	//println(&emptyStru, &emptyStru2)
-	go f()
-	g()
+	//go f()
+	//g()
+	//doCall( hello)
+
+	//var mt = MyType{}
+	//fmt.Println(mt.ToString())
+	//
+	//v1 := reflect.ValueOf(&mt).Elem()
+	//fmt.Println(v1.MethodByName("ToString").Call(nil)[0])
+
+	//v := reflect.ValueOf(mt)
+	//v.MethodByName("SetI").Call([]reflect.Value{ reflect.ValueOf(12)})
+	//fmt.Println(v.MethodByName("ToString").Call(nil)[0]	)
 
 }
