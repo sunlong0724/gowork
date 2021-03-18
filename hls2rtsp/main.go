@@ -53,6 +53,7 @@ func main() {
 				case <-ctx.Done():
 					return
 				default:
+					time.Sleep(time.Second)
 				}
 			}
 		}(ctx, k, v)
