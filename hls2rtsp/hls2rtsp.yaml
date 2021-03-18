@@ -1,0 +1,8 @@
+items:
+  cctvedu:
+    cmd:
+      "ffplay"
+    hls:
+      "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"
+    rtsp:
+      "rtsp://127.0.0.1/test1.sdp"

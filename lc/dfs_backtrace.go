@@ -722,7 +722,7 @@ func main() {
 	/*
 		res := subsetsWithDup([]int{1,2,2})
 	*/
-	res := partition("aabdb")
+	res := partition("aabcbdefe")
 	for _, s := range res {
 		fmt.Println(s)
 	}
