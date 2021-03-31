@@ -31,8 +31,55 @@ func Selector() Server{
 	return servers[ rand.Intn(len(servers))]
 }
 
+
+type Peoplee struct{}
+
+func (p *Peoplee) ShowA() {
+	fmt.Println("showA")
+	p.ShowB()
+}
+func (p *Peoplee) ShowB() {
+	fmt.Println("showB")
+}
+
+type Teacher struct {
+	Peoplee
+}
+
+func (t *Teacher) ShowB() {
+	fmt.Println("teacher showB")
+}
+
+func main111() {
+	t := Teacher{}
+	t.ShowA()
+}
+
+
+//func main(){
+//	for i := 0; i < 100; i++{
+//		fmt.Println(Selector())
+//	}
+//}
+
+type people interface {
+	Show()
+}
+
+type student struct{}
+
+func (this *student)Show(){
+}
+
+func live() people{
+	var stu *student
+	return stu
+}
+
 func main(){
-	for i := 0; i < 100; i++{
-		fmt.Println(Selector())
+	if live() == nil {
+		fmt.Println("AAAAAAAAAAAAAA")
+	}else{
+		fmt.Println("BBBBBBBBBBBBB")
 	}
 }
